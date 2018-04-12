@@ -1,0 +1,42 @@
+{
+  "name": "json-genny",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^8.2.0",
+    "axios": "^0.18.0",
+    "babel-preset-env": "^1.6.1",
+    "bulma": "^0.6.2",
+    "classnames": "^2.2.5",
+    "crypto-js": "^3.1.9-1",
+    "noty": "^3.2.0-beta",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-modules": "^1.1.0",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-easy-state": "^5.0.0",
+    "react-router-dom": "^4.2.2",
+    "react-spinkit": "^3.0.0",
+    "roboto-fontface": "^0.9.0",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  }
+}

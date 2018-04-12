@@ -1,0 +1,28 @@
+:root {
+  --background: linear-gradient(to top, #4481eb 0%, #04befe 100%);
+  --background__light: #fff;
+  --background__grey: #ebebeb;
+  --background__dark: #222;
+  --text: #333;
+  --text__grey: #767676;
+  --text__light: #fff;
+  --shadow: 0 0 20px rgba(0, 0, 0, .15);
+  --shadow-input: 0px 2px 2px #00000036;
+  --shadow-input__inset: inset -1px 1px 5px #00000036, 0 0 0px #00000036;
+  --shadow-input__inset-inverted: inset 0 0 0px #00000036, -1px 1px 5px #00000036;
+  --radius: 4px;
+
+  --padding__small: 5px;
+  --padding__medium: 10px;
+  --padding__large: 15px;
+  --padding__xlarge: 30px;
+  --padding__xxlarge: 45px;
+  --padding__xxxlarge: 60px;
+
+  --margin__small: var(--padding__small);
+  --margin__medium: var(--padding__medium);
+  --margin__large: var(--padding__large);
+  --margin__xlarge: var(--padding__xlarge);
+  --margin__xxlarge: var(--padding__xxlarge);
+  --margin__xxxlarge: var(--padding__xxxlarge);
+}

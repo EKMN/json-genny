@@ -1,0 +1,31 @@
+.wrapper {
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background);
+}
+
+.container {
+  margin: var(--margin-large);
+  animation: fadein .25s ease-in-out;
+  color: var(--text);
+  padding: var(--padding__xlarge);
+  margin: var(--margin__large);
+  background: var(--background__light);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+@keyframes fadein {
+  from {
+    transform: scale(.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

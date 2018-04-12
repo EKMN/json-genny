@@ -1,0 +1,69 @@
+{
+  "title": "Example JSON generated form",
+  "version": "1.0.1",
+  "exports": {
+    "as": "json",
+    "to": "https://localhost:3000/webhook",
+    "using": "POST"
+  },
+  "formSettings": {
+    "submitName": "Tallenna",
+    "resetName": "Tyhjennä",
+    "saveSuccess": "Tallennettu",
+    "saveFail": "Virhe"
+  },
+  "inputs": [
+    {
+      "name": "File input",
+      "type": "file",
+      "filename": "myfile.txt",
+      "fileLabel": "Choose a file...",
+      "fileIcon": "far fa-file",
+      "helpText": "this file input was json generated"
+    },
+    {
+      "name": "Select",
+      "type": "select",
+      "options": [ "123", "345", "678" ],
+      "icon": "fas fa-globe",
+      "helpText": "This select was json generated"
+    },
+    {
+      "name": "Select with input",
+      "type": "select-input",
+      "options": [ "abc", "def", "ghi" ],
+      "placeholder": "Select with input",
+      "helpText": "This select with input was json generated"
+    },
+    {
+      "name": "Textarea",
+      "type": "textarea",
+      "placeholder": "Select with input",
+      "helpText": "This textarea was json generated"
+    },
+    {
+      "name": "input example",
+      "type": "input__text",
+      "placeholder": "input example",
+      "helpText": "This text input was json generated"
+    },
+    {
+      "name": "input example 2",
+      "type": "input__password",
+      "placeholder": "input example 2",
+      "helpText": "This password input was json generated"
+    },
+    {
+      "name": "input example 3",
+      "type": "input__email",
+      "placeholder": "input example 3",
+      "helpText": "This email input was json generated"
+    },
+    {
+      "name": "input example 4",
+      "type": "input__tel",
+      "placeholder": "input example 4",
+      "helpText": "This telephone input was json generated"
+    }
+  ]
+}

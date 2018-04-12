@@ -1,0 +1,4 @@
+.formButtons a,
+.formButtons input {
+  transition: background .1s linear;
+}

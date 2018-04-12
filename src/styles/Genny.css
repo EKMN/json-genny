@@ -1,0 +1,63 @@
+.formEntry {
+  max-width: 500px;
+}
+
+:global(.field) {
+  width: 100%;
+}
+
+.formEntry > :global(.field):last-child {
+  margin-top: var(--margin__xlarge);
+}
+
+/*
+.formEntry input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  border-radius: var(--radius);
+  font-size: 1rem;
+}
+
+.formEntry label {
+  color: var(--text__grey);
+  display: block;
+  margin-bottom: 3px;
+}
+
+.formEntry > div {
+  margin-top: var(--margin__large);
+}
+
+.formEntry > input:last-child {
+  margin-top: var(--margin__large);
+}
+
+.formEntry h1 {
+  width: 100%;
+  font-weight: 300;
+  text-align: center;
+  padding: var(--padding__xlarge);
+}
+
+.formEntry input[type='submit'] {
+  padding: var(--padding__large);
+  background: var(--background__dark);
+  color: var(--text__light);
+  box-shadow: var(--shadow-input__inset-inverted);
+  transition: all 0.15s ease-in-out;
+}
+
+.formEntry input[type='submit']:focus,
+.formEntry input[type='submit']:active,
+.formEntry input[type='submit']:hover {
+  transform: scale(1.01);
+  box-shadow: var(--shadow-input__inset);
+}
+
+.formEntry input[type='text'] {
+  padding: var(--padding__large);
+  background: var(--background__grey);
+  color: var(--text);
+  box-shadow: var(--shadow-input__inset);
+} */
