@@ -35,7 +35,7 @@ const FormButtons = ({ resetForm }) => {
     }
   }
   return (
-    <div className={'field ' + 'is-grouped ' + 'is-grouped-centered ' + formButtons}>
+    <div className={`field is-grouped is-grouped-centered ${formButtons}`}>
       <p className='control'>
         <button className='transparent'>
           <a className={saveButton}>

@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 // import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import { Route } from 'react-router-dom'
+// import Popup from 'reactjs-popup'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 import { view } from 'react-easy-state'
 import state from '../utils/state'
+import Editor from '../components/Editor'
 
 import Container from './Container'
 import Genny from './Genny'
@@ -23,8 +26,14 @@ class App extends Component {
   render () {
     return (
       <Container>
-        <Route path='*/:action' component={Genny} />
-        <Route path='*/:action/:resource' component={Genny} />
+        <Router>
+          <Switch>
+            <Route exact path='/' component={Genny} />
+            <Route exact path='/edit' component={Editor} />
+            <Route exact path='/:action' component={Genny} />
+            <Route exact path='/:action/:resource' component={Genny} />
+          </Switch>
+        </Router>
       </Container>
     )
   }
