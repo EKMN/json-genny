@@ -1,7 +1,8 @@
 import axios from 'axios'
-window.debug = false
+import fileToBase64 from './fileToBase64'
+window.debug = true
 
-const eventToEntries = (event) => {
+const eventToEntries = async (event, convertFiles = false) => {
   // map through all form data
   let entries = [ ...event.target.elements ].map((element) => {
     const { name, value, files } = element
@@ -16,7 +17,7 @@ const eventToEntries = (event) => {
 
   // remove empty objects if such exist.
   // key becomes the 'name' value and 'value' becomes key's value
-  return entries
+  entries = await entries
     .filter((entry) => {
       const { name, value } = entry
 
@@ -24,22 +25,24 @@ const eventToEntries = (event) => {
 
       return typeof value !== 'object' || value.length
     })
-    .map((entry) => {
+    .map(async (entry) => {
       const { name, value } = entry
 
       // we have a file
       if (typeof value === 'object' && value.length) {
-        console.log(value[0])
-        window.value = value[0]
-        return { [name]: value }
+        const file = convertFiles ? await fileToBase64(value[0]) : value[0]
+        window.debug && console.log('We have a file', file)
+        return { [name]: file }
       }
 
       return { [name]: value }
     })
+
+  return Promise.all(entries)
 }
 
-export const sendAsJson = (event, where, protocol = 'post') => {
-  const entries = eventToEntries(event)
+export const sendAsJson = async (event, where, protocol = 'post') => {
+  const entries = await eventToEntries(event, true)
 
   return new Promise((resolve, reject) => {
     axios({
@@ -56,8 +59,8 @@ export const sendAsJson = (event, where, protocol = 'post') => {
   })
 }
 
-export const sendAsForm = (event, where, protocol = 'post') => {
-  const entries = eventToEntries(event)
+export const sendAsForm = async (event, where, protocol = 'post') => {
+  const entries = await eventToEntries(event)
   let formData = new window.FormData()
 
   for (let key in entries) {

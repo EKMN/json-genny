@@ -15,7 +15,14 @@ import notification from '../utils/notification'
 import { sendAsJson, sendAsForm } from '../utils/send'
 
 class Genny extends Component {
-  submitData (event) {
+  componentWillUnmount () {
+    // reset state and clear any timeouts
+    state.gennySubmitStatus = null
+    state.gennySubmitting = false
+    clearTimeout(this.submitTimeout)
+  }
+
+  submitData = (event) => {
     event.preventDefault()
 
     // exit if genny is submitting
@@ -42,7 +49,7 @@ class Genny extends Component {
     state.gennySubmitStatus = null
     state.gennySubmitting = true
 
-    setTimeout(() => {
+    this.submitTimeout = setTimeout(() => {
       const randomChance = randomBoolean()
 
       switch (randomChance) {
@@ -61,7 +68,7 @@ class Genny extends Component {
     }, 3500)
   }
 
-  resetForm (event) {
+  resetForm = (event) => {
     state.gennySubmitStatus = null
     state.gennySubmitting = false
   }

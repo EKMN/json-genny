@@ -1,5 +1,8 @@
+/* --background: linear-gradient(to top, #4481eb 0%, #04befe 100%); */
+/* --background: linear-gradient(to top, #c6c6c6 0%, #dedede 100%); */
+
 :root {
-  --background: linear-gradient(to top, #4481eb 0%, #04befe 100%);
+  --background: #efefef;
   --background__light: #fff;
   --background__grey: #ebebeb;
   --background__dark: #222;

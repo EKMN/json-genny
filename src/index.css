@@ -4,6 +4,11 @@ html {
   font-size: 16px;
 }
 
+body {
+  position: relative;
+  height: 100%;
+}
+
 *,
 *:before,
 *:after {
@@ -52,4 +57,56 @@ button:global(.transparent) {
 
 :global(.fade-background) {
   transition: background .1s linear;
+}
+
+:global(.popup) {
+  position: fixed;
+  left: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  z-index: 999;
+  background: rgba(194, 194, 194, .6);
+  animation: fadein .35s ease-in-out;
+}
+
+:global(.editor) {
+  background: white;
+  padding: 15px;
+  max-width: 800px;
+  width: 100%;
+  animation: fadeinScale .4s ease-in-out;
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+}
+
+:global(.noscroll) {
+  overflow-y: hidden;
+}
+
+@keyframes fadeinScale {
+  from {
+    transform: scale(.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

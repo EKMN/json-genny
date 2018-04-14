@@ -5,10 +5,10 @@ import state from '../utils/state'
 import Spinner from 'react-spinkit'
 import { container, wrapper } from '../styles/Container.css'
 
-const Container = (props) => (
+const Container = ({ children }) => (
   <div className={wrapper}>
-    {!state.hasBooted && <Spinner name='folding-cube' color='white' />}
-    {state.hasBooted && <div className={container}>{props.children}</div>}
+    {!state.hasBooted && <Spinner name='folding-cube' color='#222' />}
+    {state.hasBooted && <div className={container}>{children}</div>}
   </div>
 )
 
