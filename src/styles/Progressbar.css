@@ -1,0 +1,19 @@
+.progressbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: #363636;
+  transition: all .5s ease-in-out;
+}
+
+.progressbar.appear {
+  opacity: 1;
+}
+
+.progressbar.disappear {
+  opacity: 1;
+  /* opacity: 0; */
+}

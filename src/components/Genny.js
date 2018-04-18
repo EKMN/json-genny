@@ -10,6 +10,7 @@ import File from './File'
 import Select from './Select'
 import SelectInput from './SelectInput'
 import Textarea from './Textarea'
+import Progressbar from './Progressbar'
 
 import notification from '../utils/notification'
 import { sendAsJson, sendAsForm } from '../utils/send'
@@ -22,6 +23,10 @@ class Genny extends Component {
     clearTimeout(this.submitTimeout)
   }
 
+  componentDidMount () {
+    // do something here
+  }
+
   submitData = (event) => {
     event.preventDefault()
 
@@ -30,6 +35,14 @@ class Genny extends Component {
       return false
     }
 
+    // reset submit state
+    state.gennySubmitStatus = null
+    state.gennySubmitting = true
+
+    // get translations
+    const { formSettings } = state.gennyData
+    const { saveSuccess = 'Saved', saveFail = 'Save failed' } = formSettings
+
     const { exports } = state.gennyData
     const { as, to, using } = exports
 
@@ -37,35 +50,25 @@ class Genny extends Component {
       case 'json':
         // submit as json
         sendAsJson(event, to, using)
+          .then((res) => {
+            notification.success(saveSuccess)
+
+            state.gennySubmitting = false
+            state.gennySubmitStatus = 'success'
+          })
+          .catch((err) => {
+            window.debug && console.log(err)
+            notification.error(saveFail)
+
+            state.gennySubmitting = false
+            state.gennySubmitStatus = 'error'
+          })
         break
       case 'form':
         // submit using FormData
         sendAsForm(event, to, using)
         break
     }
-
-    const randomBoolean = () => !!(Math.floor(Math.random() * 10) % 2)
-
-    state.gennySubmitStatus = null
-    state.gennySubmitting = true
-
-    this.submitTimeout = setTimeout(() => {
-      const randomChance = randomBoolean()
-
-      switch (randomChance) {
-        case true:
-          notification.success()
-          break
-        case false:
-          notification.error()
-          break
-      }
-
-      const message = randomChance ? 'success' : 'error'
-
-      state.gennySubmitting = false
-      state.gennySubmitStatus = message
-    }, 3500)
   }
 
   resetForm = (event) => {
@@ -74,10 +77,8 @@ class Genny extends Component {
   }
 
   render () {
-    // const { match } = this.props
-    // const { params } = match
+    const { gennyUploadProgress, gennySubmitting } = state
     const { title, subtitle, inputs, version } = state.gennyData
-
     const outputExperimental = inputs.map((input, index) => {
       const { type } = input
       const { name, inputName, inputName2, fileName, fileLabel, fileIcon, helpText, options, icon, placeholder } = input
@@ -161,13 +162,16 @@ class Genny extends Component {
     })
 
     return (
-      <form className={formEntry} onSubmit={this.submitData}>
-        <Hero version={version} title={title} subtitle={subtitle || 'subtitle'} />
+      <div>
+        <Progressbar toggled={gennySubmitting} progress={gennyUploadProgress || 0} />
+        <form className={formEntry} onSubmit={this.submitData}>
+          <Hero version={version} title={title} subtitle={subtitle || 'subtitle'} />
 
-        {outputExperimental}
+          {outputExperimental}
 
-        <FormButtons resetForm={this.resetForm} />
-      </form>
+          <FormButtons resetForm={this.resetForm} />
+        </form>
+      </div>
     )
   }
 }

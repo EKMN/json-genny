@@ -1,6 +1,19 @@
 import axios from 'axios'
 import fileToBase64 from './fileToBase64'
-window.debug = true
+import state from './state'
+window.debug = false
+
+const onUploadProgress = (progressEvent) => {
+  const { loaded, total } = progressEvent
+  const progress = Math.floor(loaded / total * 100)
+  state.gennyUploadProgress = progress
+}
+
+const resetProgress = () => {
+  setTimeout(() => {
+    state.gennyUploadProgress = 0
+  }, 350)
+}
 
 const eventToEntries = async (event, convertFiles = false) => {
   // map through all form data
@@ -17,28 +30,31 @@ const eventToEntries = async (event, convertFiles = false) => {
 
   // remove empty objects if such exist.
   // key becomes the 'name' value and 'value' becomes key's value
-  entries = await entries
+  return entries
     .filter((entry) => {
       const { name, value } = entry
 
       window.debug && console.log(name, value.length, typeof value)
 
-      return typeof value !== 'object' || value.length
+      return typeof value !== 'object' || value.length // only release the key-value pair if the value is a file
     })
-    .map(async (entry) => {
+    .reduce(async (entries, entry) => {
+      entries = await entries // wait previous promise to resolve
       const { name, value } = entry
 
       // we have a file
       if (typeof value === 'object' && value.length) {
         const file = convertFiles ? await fileToBase64(value[0]) : value[0]
         window.debug && console.log('We have a file', file)
-        return { [name]: file }
+
+        entries['files'] = entries['files'] || []
+        entries['files'].push({ name, data: file })
+      } else {
+        entries[name] = value
       }
 
-      return { [name]: value }
-    })
-
-  return Promise.all(entries)
+      return entries
+    }, {})
 }
 
 export const sendAsJson = async (event, where, protocol = 'post') => {
@@ -48,13 +64,17 @@ export const sendAsJson = async (event, where, protocol = 'post') => {
     axios({
       method: protocol,
       url: where,
-      data: entries
+      data: entries,
+      onUploadProgress
     })
       .then((response) => {
         resolve(response)
       })
       .catch((error) => {
         reject(error)
+      })
+      .then(() => {
+        resetProgress()
       })
   })
 }
@@ -72,13 +92,17 @@ export const sendAsForm = async (event, where, protocol = 'post') => {
     axios({
       method: protocol,
       url: where,
-      data: formData
+      data: formData,
+      onUploadProgress
     })
       .then((response) => {
         resolve(response)
       })
       .catch((error) => {
         reject(error)
+      })
+      .then(() => {
+        resetProgress()
       })
   })
 }

@@ -19,6 +19,21 @@
   box-shadow: var(--shadow);
 }
 
+.fadeIn {
+  animation: fadein .25s ease-in-out;
+}
+
+.helperText {
+  width: 100%;
+  margin-top: 15px;
+  position: fixed;
+  left: 0;
+}
+
+.textCenter {
+  text-align: center;
+}
+
 @keyframes fadein {
   from {
     transform: scale(.9);

@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { view } from 'react-easy-state'
 import { Link } from 'react-router-dom'
 
 const New = (props) => (
-  <a className='button is-fullwidth'>
+  <a className='button is-fullwidth' {...props}>
     <span className='icon is-small'>
       <i className='far fa-plus-square' />
     </span>
@@ -12,7 +12,7 @@ const New = (props) => (
 )
 
 const Edit = (props) => (
-  <Link to='/edit' className='button is-fullwidth'>
+  <Link to='/form/edit' className='button is-fullwidth' {...props}>
     <span className='icon is-small'>
       <i className='far fa-edit' />
     </span>
@@ -21,7 +21,7 @@ const Edit = (props) => (
 )
 
 const Delete = (props) => (
-  <a className='button is-fullwidth'>
+  <a className='button is-fullwidth' {...props}>
     <span className='icon is-small'>
       <i className='far fa-trash-alt' />
     </span>
@@ -29,18 +29,30 @@ const Delete = (props) => (
   </a>
 )
 
-const Controls = ({ actions, saveForm, editForm, removeForm }) => (
-  <div className='field has-addons'>
-    <p className='control is-fullwidth is-expanded'>
-      <New />
-    </p>
-    <p className='control is-fullwidth is-expanded'>
-      <Edit />
-    </p>
-    <p className='control is-fullwidth is-expanded'>
-      <Delete />
-    </p>
-  </div>
-)
+class Controls extends Component {
+  createNewForm = () => {
+    console.log('createNewForm called')
+  }
+
+  deleteThisForm = () => {
+    console.log('deleteThisForm called')
+  }
+
+  render () {
+    return (
+      <div className='field has-addons'>
+        <p className='control is-fullwidth is-expanded'>
+          <New onClick={this.createNewForm} />
+        </p>
+        <p className='control is-fullwidth is-expanded'>
+          <Edit />
+        </p>
+        <p className='control is-fullwidth is-expanded'>
+          <Delete onClick={this.deleteThisForm} />
+        </p>
+      </div>
+    )
+  }
+}
 
 export default view(Controls)

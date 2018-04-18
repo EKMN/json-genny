@@ -10,24 +10,27 @@ const defaults = {
 // { text = 'Success', layout = 'topRight', theme = 'metroui' } = {}
 
 export default {
-  success: (text = 'Success') => {
+  success: (text = 'Success', timeout = defaults.timeout) => {
     new window.Noty({
       ...defaults,
       text,
+      timeout,
       type: 'success'
     }).show()
   },
-  error: (text = 'Error') => {
+  error: (text = 'Error', timeout = defaults.timeout) => {
     new window.Noty({
       ...defaults,
       text,
+      timeout,
       type: 'error'
     }).show()
   },
-  warning: (text = 'Warning') => {
+  warning: (text = 'Warning', timeout = defaults.timeout) => {
     new window.Noty({
       ...defaults,
       text,
+      timeout,
       type: 'warning'
     }).show()
   }
