@@ -7,18 +7,21 @@ const SelectInput = ({
   placeholder = label,
   helpText = '',
   inputName = '',
-  inputName2 = inputName
+  inputName2 = inputName,
+  required = false
 }) => (
   <div className='field'>
     <label className='label'>{label}</label>
     <div className='field has-addons'>
       <p className='control'>
         <span className='select'>
-          <select name={inputName}>{options.map((option, index) => <option key={index}>{option}</option>)}</select>
+          <select required={required} name={inputName}>
+            {options.map((option, index) => <option key={index}>{option}</option>)}
+          </select>
         </span>
       </p>
       <p className='control is-expanded'>
-        <input className='input' type='text' placeholder={placeholder} name={inputName2} />
+        <input required={required} className='input' type='text' placeholder={placeholder} name={inputName2} />
       </p>
     </div>
     {helpText && <p className='help'>{helpText}</p>}

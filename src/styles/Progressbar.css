@@ -7,6 +7,7 @@
   width: 100%;
   background: #363636;
   transition: all .5s ease-in-out;
+  z-index: 999;
 }
 
 .progressbar.appear {

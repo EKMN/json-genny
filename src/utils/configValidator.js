@@ -58,7 +58,7 @@ const validator = (rawConfig) => {
   // return true or false whether or not config is valid
   const isValid = !missingFromConfig.length
   return {
-    valid: isValid,
+    isValid,
     failed: missingFromConfig
   }
 }

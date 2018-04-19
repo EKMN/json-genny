@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { view } from 'react-easy-state'
+import axios from 'axios'
 import state from '../utils/state'
 import notification from '../utils/notification'
+import validate from '../utils/configValidator'
 import Popup from './Popup'
 
 const SaveText = ({ onSave, onError, saveText, errorText, saveConfig }) => (
@@ -15,27 +17,9 @@ const SaveText = ({ onSave, onError, saveText, errorText, saveConfig }) => (
 
 class Editor extends Component {
   state = {
-    localConfig: '',
+    isLoading: false,
     recentlySaved: false,
     errorOnSave: false
-  }
-
-  // this will update the localConfig when we actually have booted
-  checkForConfig = () => {
-    const { hasBooted, gennyData } = state
-    if (hasBooted) {
-      this.setState({
-        localConfig: JSON.stringify(gennyData, null, 2)
-      })
-    } else {
-      this.configTimeout = setTimeout(() => {
-        this.checkForConfig()
-      }, 250)
-    }
-  }
-
-  componentDidMount () {
-    this.checkForConfig()
   }
 
   componentWillUnmount () {
@@ -45,49 +29,94 @@ class Editor extends Component {
   }
 
   onChange = (event) => {
-    this.setState({
-      localConfig: event.target.value
-    })
+    state.gennyDraftData = event.target.value
   }
 
   exitEditor = () => {
     this.props.history.goBack()
   }
 
+  recentlySaved = () => {
+    const { gennyDraftData } = state
+    const jsonToObject = JSON.parse(gennyDraftData)
+    state.gennyData = jsonToObject
+    this.setState({
+      recentlySaved: true
+    })
+    this.savedTimeout = setTimeout(() => {
+      this.setState({
+        recentlySaved: false
+      })
+    }, 3000)
+    notification.success('Saved!')
+  }
+
+  recentlyFailed = () => {
+    this.setState({
+      errorOnSave: true
+    })
+    this.errorTimeout = setTimeout(() => {
+      this.setState({
+        errorOnSave: false
+      })
+    }, 3000)
+  }
+
   onSubmit = () => {
-    const { recentlySaved, errorOnSave } = this.state
-    if (recentlySaved || errorOnSave) {
+    const { recentlySaved, errorOnSave, isLoading } = this.state
+    if (recentlySaved || errorOnSave || isLoading) {
       // do not allow another action until the timeout has cleared
       return false
     }
 
     // save our local changes to our entire app
     try {
-      const jsonToObject = JSON.parse(this.state.localConfig)
-      state.gennyData = jsonToObject
+      const { id } = this.props
+      const submitUrl = `${process.env.API_LOCATION}/${id}`.split(' ').join('')
+      const jsonToObject = JSON.parse(state.gennyDraftData)
+
+      const validation = validate(jsonToObject)
+
+      if (!validation.isValid) {
+        const error = new Error('Invalid configuration!')
+        error.type = 'invalid'
+        error.failed = validation.failed
+        throw error
+      }
+
+      // set loader
       this.setState({
-        recentlySaved: true
+        isLoading: true
       })
-      this.savedTimeout = setTimeout(() => {
-        this.setState({
-          recentlySaved: false
+
+      // post changes to server
+      axios
+        .post(submitUrl, jsonToObject)
+        .then((data) => {
+          this.recentlySaved()
         })
-      }, 3000)
-    } catch (e) {
-      notification.error('Invalid json, changes not saved!')
-      this.setState({
-        errorOnSave: true
-      })
-      this.errorTimeout = setTimeout(() => {
-        this.setState({
-          errorOnSave: false
+        .catch((error) => {
+          notification.error(error.message)
+          this.recentlyFailed()
         })
-      }, 3000)
+        .then(() => {
+          this.setState({
+            isLoading: false
+          })
+        })
+    } catch (error) {
+      if (error.type === 'invalid') {
+        notification.error(`${error.message} ${error.failed.map((fail) => `<br />- ${fail}`)}`, 7500)
+      } else {
+        notification.error('Invalid json, changes not saved!')
+      }
+
+      this.recentlyFailed()
     }
   }
 
   render () {
-    const { hasBooted, gennyData = {} } = state
+    const { hasBooted, gennyData, gennyDraftData } = state
     const { formSettings = {} } = gennyData
     const {
       saveSuccess = 'Saved',
@@ -95,7 +124,7 @@ class Editor extends Component {
       exitConfig = 'Exit editor',
       saveConfig = 'Save config'
     } = formSettings
-    const { recentlySaved, errorOnSave } = this.state
+    const { recentlySaved, errorOnSave, isLoading } = this.state
     return (
       hasBooted && (
         <Popup>
@@ -107,7 +136,7 @@ class Editor extends Component {
                   className={`textarea ${errorOnSave && 'is-danger'} ${recentlySaved && 'is-success'} `}
                   placeholder='Textarea'
                   style={{ height: '500px', fontFamily: 'monospace' }}
-                  value={this.state.localConfig}
+                  value={gennyDraftData}
                   onChange={this.onChange}
                 />
               </div>
@@ -117,7 +146,7 @@ class Editor extends Component {
                 <a
                   className={`button fade-background ${recentlySaved ? 'is-success' : 'is-dark'} ${errorOnSave
                     ? 'is-danger'
-                    : 'is-dark'}`}
+                    : 'is-dark'} ${isLoading && 'is-loading'}`}
                 >
                   {recentlySaved && (
                     <span className='icon is-small'>

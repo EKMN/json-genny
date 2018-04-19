@@ -1,0 +1,157 @@
+{
+  "example": {
+    "title": "Example JSON generated form",
+    "subtitle": "served from a server",
+    "version": "1.0.5",
+    "exports": {
+      "as": "json",
+      "to": "http://localhost:3000/tasks",
+      "using": "POST"
+    },
+    "formSettings": {
+      "submitName": "Save",
+      "resetName": "Clear",
+      "saveSuccess": "Saved",
+      "saveFail": "Error"
+    },
+    "inputs": [
+      {
+        "name": "File input",
+        "type": "file",
+        "fileName": "myfile.txt",
+        "fileLabel": "Select a file",
+        "fileIcon": "far fa-file",
+        "helpText": "this file input was json generated"
+      },
+      {
+        "name": "Select",
+        "inputName": "NUMBER_SEQUENCES",
+        "type": "select",
+        "options": [ "123", "345", "678" ],
+        "icon": "fas fa-globe",
+        "helpText": "This select was json generated"
+      },
+      {
+        "name": "Select with input",
+        "inputName": "STRING_SEQUENCES",
+        "inputName2": "STIRNG_SEQUENCES_INPUT",
+        "type": "select-input",
+        "options": [ "abc", "def", "ghi" ],
+        "placeholder": "Select with input",
+        "helpText": "This select with input was json generated"
+      },
+      {
+        "name": "Textarea",
+        "inputName": "USER_DESCRIPTION",
+        "type": "textarea",
+        "placeholder": "Select with input",
+        "helpText": "This textarea was json generated"
+      },
+      {
+        "name": "input example",
+        "inputName": "USER_TEXT",
+        "type": "input__text",
+        "placeholder": "input example",
+        "helpText": "This text input was json generated"
+      },
+      {
+        "name": "input example 2",
+        "inputName": "USER_PASSWORD",
+        "type": "input__password",
+        "placeholder": "input example 2",
+        "helpText": "This password input was json generated"
+      },
+      {
+        "name": "input example 3",
+        "inputName": "USER_EMAIL",
+        "type": "input__email",
+        "placeholder": "input example 3",
+        "helpText": "This email input was json generated"
+      },
+      {
+        "name": "input example 4",
+        "inputName": "USER_TELEPHONE",
+        "type": "input__tel",
+        "placeholder": "input example 4",
+        "helpText": "This telephone input was json generated"
+      }
+    ]
+  },
+  "invalid": {
+    "subtitle": "served from a server",
+    "version": "1.0.1",
+    "exports": {
+      "as": "json",
+      "using": "POST"
+    },
+    "formSettings": {
+      "submitName": "Tallenna",
+      "resetName": "Tyhjennä",
+      "saveSuccess": "Tallennettu",
+      "saveFail": "Virhe"
+    },
+    "inputs": [
+      {
+        "name": "File input",
+        "type": "file",
+        "fileName": "myfile.txt",
+        "fileLabel": "Select a file",
+        "fileIcon": "far fa-file",
+        "helpText": "this file input was json generated"
+      },
+      {
+        "name": "Select",
+        "inputName": "NUMBER_SEQUENCES",
+        "type": "select",
+        "options": [ "123", "345", "678" ],
+        "icon": "fas fa-globe",
+        "helpText": "This select was json generated"
+      },
+      {
+        "name": "Select with input",
+        "inputName": "STRING_SEQUENCES",
+        "inputName2": "STIRNG_SEQUENCES_INPUT",
+        "type": "select-input",
+        "options": [ "abc", "def", "ghi" ],
+        "placeholder": "Select with input",
+        "helpText": "This select with input was json generated"
+      },
+      {
+        "name": "Textarea",
+        "inputName": "USER_DESCRIPTION",
+        "type": "textarea",
+        "placeholder": "Select with input",
+        "helpText": "This textarea was json generated"
+      },
+      {
+        "name": "input example",
+        "inputName": "USER_TEXT",
+        "type": "input__text",
+        "placeholder": "input example",
+        "helpText": "This text input was json generated"
+      },
+      {
+        "name": "input example 2",
+        "inputName": "USER_PASSWORD",
+        "type": "input__password",
+        "placeholder": "input example 2",
+        "helpText": "This password input was json generated"
+      },
+      {
+        "name": "input example 3",
+        "inputName": "USER_EMAIL",
+        "type": "input__email",
+        "placeholder": "input example 3",
+        "helpText": "This email input was json generated"
+      },
+      {
+        "name": "input example 4",
+        "inputName": "USER_TELEPHONE",
+        "type": "input__tel",
+        "placeholder": "input example 4",
+        "helpText": "This telephone input was json generated"
+      }
+    ]
+  },
+  "forms": []
+}

@@ -1,5 +1,6 @@
 {
-  "title": "Example JSON generated form",
+  "title": "This is a Genny form",
+  "subtitle": "100% JSON-generated freedom",
   "version": "1.0.1",
   "exports": {
     "as": "json",
@@ -18,70 +19,77 @@
     {
       "name": "File input",
       "type": "file",
-      "fileName": "myfile.txt",
-      "fileLabel": "Select a file",
+      "fileName": "important.doc",
+      "fileLabel": "Select a document",
       "fileIcon": "far fa-file",
-      "helpText": "this file input was json generated"
+      "helpText": "This can be used to upload a file"
     },
     {
-      "name": "File inputs",
+      "name": "File input #2",
       "type": "file",
-      "fileName": "myfile.txts",
-      "fileLabel": "Select a files",
-      "fileIcon": "far fa-file",
-      "helpText": "this file input was json generated"
+      "fileName": "video.mp4",
+      "fileLabel": "Select a video",
+      "fileIcon": "far fa-file-video",
+      "helpText": "Genny supports multiple upload fields"
     },
     {
-      "name": "Select",
+      "required": true,
+      "name": "Select input",
       "inputName": "NUMBER_SEQUENCES",
       "type": "select",
       "options": [ "123", "345", "678" ],
       "icon": "fas fa-globe",
-      "helpText": "This select was json generated"
+      "helpText": "Use this if you need to choose between a few options"
     },
     {
+      "required": true,
       "name": "Select with input",
       "inputName": "STRING_SEQUENCES",
       "inputName2": "STIRNG_SEQUENCES_INPUT",
       "type": "select-input",
       "options": [ "abc", "def", "ghi" ],
       "placeholder": "Select with input",
-      "helpText": "This select with input was json generated"
+      "helpText": "Essentially a select input merged into a text input"
     },
     {
+      "required": true,
       "name": "Textarea",
       "inputName": "USER_DESCRIPTION",
       "type": "textarea",
       "placeholder": "Select with input",
-      "helpText": "This textarea was json generated"
+      "helpText": "Useful for gathering feedback, for example"
     },
     {
-      "name": "input example",
+      "required": true,
+      "name": "Text input",
       "inputName": "USER_TEXT",
       "type": "input__text",
       "placeholder": "input example",
-      "helpText": "This text input was json generated"
+      "helpText": "A common text input. Useful for anything and everything"
     },
     {
-      "name": "input example 2",
+      "required": true,
+      "name": "Password input",
       "inputName": "USER_PASSWORD",
       "type": "input__password",
       "placeholder": "input example 2",
-      "helpText": "This password input was json generated"
+      "helpText": "Use when you need to gather passwords or secrets"
     },
     {
-      "name": "input example 3",
+      "required": true,
+      "name": "Email input",
       "inputName": "USER_EMAIL",
       "type": "input__email",
       "placeholder": "input example 3",
-      "helpText": "This email input was json generated"
+      "helpText": "This form asks for an email"
     },
     {
-      "name": "input example 4",
+      "required": true,
+      "name": "Telephone input",
       "inputName": "USER_TELEPHONE",
       "type": "input__tel",
       "placeholder": "input example 4",
-      "helpText": "This telephone input was json generated"
+      "helpText": "If you need to gather phone numbers, use this"
     }
   ]
 }

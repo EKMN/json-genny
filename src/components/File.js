@@ -23,7 +23,8 @@ class File extends Component {
       fileLabel = 'Select a file',
       fileName = ' No file selected...',
       fileIcon = 'far fa-file',
-      helpText = ''
+      helpText = '',
+      required = false
     } = this.props
     const localFileName = this.state.fileName || fileName
 
@@ -32,7 +33,13 @@ class File extends Component {
         <label className='label'>{label}</label>
         <div className='file has-name is-fullwidth'>
           <label className='file-label'>
-            <input className='file-input' type='file' name={localFileName} onChange={this.onChange} />
+            <input
+              className='file-input'
+              type='file'
+              name={localFileName}
+              onChange={this.onChange}
+              required={required}
+            />
             <span className='file-cta'>
               <span className='file-icon'>
                 <i className={fileIcon} />

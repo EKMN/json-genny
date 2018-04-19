@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   background: var(--background);
+  background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);
 }
 
 .container {
@@ -28,6 +29,7 @@
   margin-top: 15px;
   position: fixed;
   left: 0;
+  color: white;
 }
 
 .textCenter {

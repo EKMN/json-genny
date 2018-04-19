@@ -80,8 +80,20 @@ class Genny extends Component {
     const { gennyUploadProgress, gennySubmitting } = state
     const { title, subtitle, inputs, version } = state.gennyData
     const outputExperimental = inputs.map((input, index) => {
-      const { type } = input
-      const { name, inputName, inputName2, fileName, fileLabel, fileIcon, helpText, options, icon, placeholder } = input
+      const {
+        type,
+        name,
+        inputName,
+        inputName2,
+        fileName,
+        fileLabel,
+        fileIcon,
+        helpText,
+        options,
+        icon,
+        placeholder,
+        required
+      } = input
       switch (type) {
         case 'file':
           return (
@@ -92,11 +104,20 @@ class Genny extends Component {
               fileIcon={fileIcon}
               helpText={helpText}
               key={index}
+              required={required}
             />
           )
         case 'select':
           return (
-            <Select inputName={inputName} options={options} label={name} icon={icon} helpText={helpText} key={index} />
+            <Select
+              inputName={inputName}
+              options={options}
+              label={name}
+              icon={icon}
+              helpText={helpText}
+              key={index}
+              required={required}
+            />
           )
         case 'select-input':
           return (
@@ -108,11 +129,19 @@ class Genny extends Component {
               placeholder={placeholder}
               helpText={helpText}
               key={index}
+              required={required}
             />
           )
         case 'textarea':
           return (
-            <Textarea inputName={inputName} label={name} placeholder={placeholder} helpText={helpText} key={index} />
+            <Textarea
+              inputName={inputName}
+              label={name}
+              placeholder={placeholder}
+              helpText={helpText}
+              key={index}
+              required={required}
+            />
           )
         case 'input__text':
           return (
@@ -123,6 +152,7 @@ class Genny extends Component {
               placeholder={placeholder}
               helpText={helpText}
               key={index}
+              required={required}
             />
           )
         case 'input__password':
@@ -134,6 +164,7 @@ class Genny extends Component {
               placeholder={placeholder}
               helpText={helpText}
               key={index}
+              required={required}
             />
           )
         case 'input__email':
@@ -145,6 +176,7 @@ class Genny extends Component {
               placeholder={placeholder}
               helpText={helpText}
               key={index}
+              required={required}
             />
           )
         case 'input__tel':
@@ -156,6 +188,7 @@ class Genny extends Component {
               placeholder={placeholder}
               helpText={helpText}
               key={index}
+              required={required}
             />
           )
       }

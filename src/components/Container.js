@@ -12,7 +12,7 @@ class Container extends Component {
       <div className={wrapper}>
         {!hasBooted && (
           <div className={textCenter}>
-            <Spinner name='folding-cube' color='#222' />
+            <Spinner name='folding-cube' color='#fff' />
             {showTimeoutSuggestion && (
               <div className={`${helperText} ${fadeIn}`}>
                 <p>Hmm... This does not seem right.</p>
@@ -21,7 +21,9 @@ class Container extends Component {
             )}
           </div>
         )}
-        {hasBooted && <div className={container}>{children}</div>}
+        <div className={container} style={{ display: hasBooted ? 'flex' : 'none' }}>
+          {children}
+        </div>
       </div>
     )
   }

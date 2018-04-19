@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import { view } from 'react-easy-state'
 import state from '../utils/state'
 
 class ConfigLoader extends Component {
   componentDidMount () {
-    state.hasBooted = true
     clearTimeout(window.timeoutSuggestion)
-    this.props.history.push('/form/default')
+    state.hasBooted = true
+    state.currentPath = '/form/default'
+    state.showTimeoutSuggestion = false
+  }
+
+  render () {
+    return <Redirect to='/form/default' />
   }
 }
 

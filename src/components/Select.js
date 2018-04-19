@@ -6,14 +6,17 @@ const Select = ({
   label = 'Select',
   icon = 'fas fa-globe',
   helpText = '',
-  inputName = ''
+  inputName = '',
+  required = false
 }) => (
   <div className='field'>
     <label className='label'>{label}</label>
     <div className='field'>
       <div className='control has-icons-left'>
         <div className='select is-fullwidth'>
-          <select name={inputName}>{options.map((option, index) => <option key={index}>{option}</option>)}</select>
+          <select required={required} name={inputName}>
+            {options.map((option, index) => <option key={index}>{option}</option>)}
+          </select>
         </div>
         <div className='icon is-small is-left'>
           <i className={icon} />
