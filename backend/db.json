@@ -1,4 +1,5 @@
 {
+  "default": {},
   "example": {
     "title": "Example JSON generated form",
     "subtitle": "served from a server",

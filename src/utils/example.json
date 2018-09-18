@@ -4,7 +4,7 @@
   "version": "1.0.1",
   "exports": {
     "as": "json",
-    "to": "http://localhost:3000/tasks",
+    "to": "https://gennybackend.now.sh/example",
     "using": "POST"
   },
   "formSettings": {

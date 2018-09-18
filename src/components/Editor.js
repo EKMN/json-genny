@@ -7,6 +7,8 @@ import notification from '../utils/notification'
 import validate from '../utils/configValidator'
 import Popup from './Popup'
 
+const HARDCODED_SERVER_URL = 'https://gennybackend.now.sh'
+
 const SaveText = ({ onSave, onError, saveText, errorText, saveConfig }) => (
   <span>
     {!onSave && !onError && saveConfig}
@@ -72,7 +74,9 @@ class Editor extends Component {
     // save our local changes to our entire app
     try {
       const { id } = this.props
-      const submitUrl = `${process.env.API_LOCATION}/${id}`.split(' ').join('')
+      // const submitUrl = `${process.env.API_LOCATION}/${id}`.split(' ').join('')
+      console.log(id)
+      const submitUrl = `${HARDCODED_SERVER_URL}/${id}`.split(' ').join('')
       const jsonToObject = JSON.parse(state.gennyDraftData)
 
       const validation = validate(jsonToObject)
@@ -146,8 +150,7 @@ class Editor extends Component {
                 <a
                   className={`button fade-background ${recentlySaved ? 'is-success' : 'is-dark'} ${errorOnSave
                     ? 'is-danger'
-                    : 'is-dark'} ${isLoading && 'is-loading'}`}
-                >
+                    : 'is-dark'} ${isLoading && 'is-loading'}`}>
                   {recentlySaved && (
                     <span className='icon is-small'>
                       <i className='fas fa-check' />

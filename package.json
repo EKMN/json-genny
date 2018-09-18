@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "set API_LOCATION http://localhost:3000 && parcel src/index.html",
-    "dev-windows": "SET API_LOCATION=http://localhost:3000 && parcel src/index.html",
+    "dev": "env API_LOCATION https://gennybackend.now.sh/example && parcel src/index.html",
+    "dev-windows": "env API_LOCATION=https://gennybackend.now.sh/example && parcel src/index.html",
     "build": "parcel build src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
